@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply font-mono antialiased;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-900;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-terminal-green rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-terminal-blue;
+  }
+}
+
+@layer components {
+  /* Terminal specific styles */
+  .terminal-output {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Smooth page transitions */
+  .page-transition {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Glow effect for interactive elements */
+  .glow-green {
+    box-shadow: 0 0 10px rgba(13, 188, 121, 0.3);
+  }
+
+  .glow-blue {
+    box-shadow: 0 0 10px rgba(59, 120, 255, 0.3);
+  }
+
+  /* Link hover effects */
+  a {
+    @apply transition-colors duration-200;
+  }
+
+  /* Focus states for accessibility */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible {
+    @apply outline-none ring-2 ring-terminal-green ring-offset-2 ring-offset-gray-900;
+  }
+}
+
+@layer utilities {
+  /* Text gradient utilities */
+  .text-gradient-green {
+    @apply bg-gradient-to-r from-terminal-green to-terminal-blue bg-clip-text text-transparent;
+  }
+
+  .text-gradient-blue {
+    @apply bg-gradient-to-r from-terminal-blue to-terminal-purple bg-clip-text text-transparent;
+  }
+
+  /* Animation utilities */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* Terminal cursor */
+  .cursor-blink {
+    animation: blink 1.2s step-end infinite;
+  }
+
+  @keyframes blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+}
+
+/* Selection color */
+::selection {
+  @apply bg-terminal-green text-gray-900;
+}
+
+::-moz-selection {
+  @apply bg-terminal-green text-gray-900;
+}
