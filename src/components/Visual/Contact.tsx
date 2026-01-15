@@ -33,7 +33,7 @@ export const Contact = () => {
     {
       icon: FaMapMarkerAlt,
       label: 'Location',
-      value: 'Bekasi, West Java, Indonesia',
+      value: 'Bogor, West Java, Indonesia',
       href: null,
       color: 'text-terminal-yellow'
     }
