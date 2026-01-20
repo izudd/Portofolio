@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Terminal } from './components/Terminal/Terminal';
 import { Hero } from './components/Visual/Hero';
@@ -9,15 +9,37 @@ import { ModeToggle } from './components/ModeToggle';
 import { MatrixRain } from './components/MatrixRain';
 import { Particles } from './components/Particles';
 import { EffectsToggle, EffectType } from './components/EffectsToggle';
+import { LoadingScreen } from './components/LoadingScreen';
 import { ViewMode } from './types';
 
 function App() {
   const [mode, setMode] = useState<ViewMode>('terminal');
   const [effect, setEffect] = useState<EffectType>('matrix');
+  const [isLoading, setIsLoading] = useState(true);
+  const [hasVisited, setHasVisited] = useState(false);
+
+  // Check if user has visited before
+  useEffect(() => {
+    const visited = localStorage.getItem('hasVisited');
+    if (visited === 'true') {
+      setHasVisited(true);
+      setIsLoading(false);
+    }
+  }, []);
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+    localStorage.setItem('hasVisited', 'true');
+  };
 
   const toggleMode = () => {
     setMode(prev => prev === 'terminal' ? 'visual' : 'terminal');
   };
+
+  // Show loading screen on first visit
+  if (isLoading && !hasVisited) {
+    return <LoadingScreen onComplete={handleLoadingComplete} />;
+  }
 
   return (
     <div className="min-h-screen relative">
