@@ -23,6 +23,7 @@ export default {
         'cursor-blink': 'cursor-blink 1.2s steps(2) infinite',
         'slide-up': 'slide-up 0.5s ease-out',
         'fade-in': 'fade-in 0.5s ease-out',
+        'spin-slow': 'spin 3s linear infinite',
       },
       keyframes: {
         'cursor-blink': {
