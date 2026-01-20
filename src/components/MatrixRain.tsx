@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 interface MatrixRainProps {
   isActive: boolean;
@@ -14,10 +14,9 @@ export const MatrixRain = ({
   color = '#0f0'
 }: MatrixRainProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [isVisible, setIsVisible] = useState(true);
-
+  
   useEffect(() => {
-    if (!isActive || !isVisible) return;
+    if (!isActive) return;
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -93,7 +92,7 @@ export const MatrixRain = ({
       cancelAnimationFrame(animationId);
       window.removeEventListener('resize', resizeCanvas);
     };
-  }, [isActive, speed, density, color, isVisible]);
+  }, [isActive, speed, density, color]);
 
   if (!isActive) return null;
 
@@ -101,7 +100,7 @@ export const MatrixRain = ({
     <canvas
       ref={canvasRef}
       className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: isVisible ? 1 : 0, transition: 'opacity 0.5s' }}
+      style={{ opacity: 1, transition: 'opacity 0.5s' }}
     />
   );
 };
