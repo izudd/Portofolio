@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { FaStar, FaQuoteLeft, FaChevronLeft, FaChevronRight, FaLinkedin, FaBuilding } from 'react-icons/fa';
+import { FaStar, FaQuoteLeft, FaChevronLeft, FaChevronRight, FaLinkedin, FaBuilding, FaPause, FaPlay } from 'react-icons/fa';
 
 interface Testimonial {
   id: number;
@@ -16,6 +16,12 @@ interface Testimonial {
 
 export const Testimonials = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isPaused, setIsPaused] = useState(false);
+  const [progress, setProgress] = useState(0);
+
+  // Auto-rotate interval (in milliseconds)
+  const AUTO_ROTATE_INTERVAL = 5000; // 5 seconds - adjust as needed!
 
   // Example testimonials - REPLACE WITH YOUR REAL ONES!
   const testimonials: Testimonial[] = [
@@ -71,12 +77,57 @@ export const Testimonials = () => {
     }
   ];
 
+  // Progress bar effect
+  useEffect(() => {
+    if (!isAutoPlaying || isPaused) {
+      setProgress(0);
+      return;
+    }
+
+    const startTime = Date.now();
+    const progressInterval = setInterval(() => {
+      const elapsed = Date.now() - startTime;
+      const newProgress = (elapsed / AUTO_ROTATE_INTERVAL) * 100;
+      
+      if (newProgress >= 100) {
+        setProgress(0);
+      } else {
+        setProgress(newProgress);
+      }
+    }, 50); // Update every 50ms for smooth animation
+
+    return () => clearInterval(progressInterval);
+  }, [currentIndex, isAutoPlaying, isPaused]);
+
+  // Auto-rotate effect
+  useEffect(() => {
+    if (!isAutoPlaying || isPaused) return;
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+    }, AUTO_ROTATE_INTERVAL);
+
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, isPaused, testimonials.length]);
+
   const nextTestimonial = () => {
     setCurrentIndex((prev) => (prev + 1) % testimonials.length);
   };
 
   const prevTestimonial = () => {
     setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
+
+  const toggleAutoPlay = () => {
+    setIsAutoPlaying(!isAutoPlaying);
+  };
+
+  const handleMouseEnter = () => {
+    setIsPaused(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsPaused(false);
   };
 
   const currentTestimonial = testimonials[currentIndex];
@@ -124,6 +175,8 @@ export const Testimonials = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -100 }}
               transition={{ duration: 0.5 }}
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
               className="bg-gray-800 rounded-2xl p-8 md:p-12 border border-gray-700 shadow-2xl"
             >
               {/* Quote Icon */}
@@ -211,20 +264,73 @@ export const Testimonials = () => {
           </button>
         </div>
 
-        {/* Dots Navigation */}
-        <div className="flex justify-center gap-3 mt-12">
-          {testimonials.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`transition-all duration-300 rounded-full ${
-                index === currentIndex
-                  ? 'w-12 h-3 bg-terminal-green'
-                  : 'w-3 h-3 bg-gray-600 hover:bg-gray-500'
-              }`}
-              aria-label={`Go to testimonial ${index + 1}`}
-            />
-          ))}
+        {/* Progress Bar */}
+        {isAutoPlaying && !isPaused && (
+          <div className="mt-6">
+            <div className="h-1 bg-gray-700 rounded-full overflow-hidden">
+              <motion.div
+                className="h-full bg-gradient-to-r from-terminal-green to-terminal-blue"
+                style={{ width: `${progress}%` }}
+                transition={{ duration: 0.05 }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Dots Navigation & Auto-play Control */}
+        <div className="flex justify-center items-center gap-6 mt-12">
+          {/* Play/Pause Button */}
+          <button
+            onClick={toggleAutoPlay}
+            className="group relative"
+            aria-label={isAutoPlaying ? 'Pause auto-play' : 'Start auto-play'}
+          >
+            <div className="bg-gray-800 hover:bg-terminal-green p-3 rounded-full border border-gray-700 transition-all duration-300 transform hover:scale-110">
+              {isAutoPlaying ? (
+                <FaPause className="text-white group-hover:text-gray-900" size={16} />
+              ) : (
+                <FaPlay className="text-white group-hover:text-gray-900 ml-0.5" size={16} />
+              )}
+            </div>
+            {/* Tooltip */}
+            <div className="absolute -top-12 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+              <div className="bg-gray-900 text-white text-xs px-3 py-2 rounded-lg whitespace-nowrap border border-gray-700">
+                {isAutoPlaying ? 'Pause' : 'Play'}
+              </div>
+            </div>
+          </button>
+
+          {/* Dots */}
+          <div className="flex gap-3">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className={`transition-all duration-300 rounded-full ${
+                  index === currentIndex
+                    ? 'w-12 h-3 bg-terminal-green'
+                    : 'w-3 h-3 bg-gray-600 hover:bg-gray-500'
+                }`}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Auto-play Indicator */}
+          {isAutoPlaying && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="flex items-center gap-2 text-terminal-green text-sm"
+            >
+              <motion.div
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ repeat: Infinity, duration: 2 }}
+                className="w-2 h-2 bg-terminal-green rounded-full"
+              />
+              <span className="text-xs text-gray-500">Auto-playing</span>
+            </motion.div>
+          )}
         </div>
 
         {/* Stats */}
