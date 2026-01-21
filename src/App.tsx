@@ -4,6 +4,7 @@ import { Terminal } from './components/Terminal/Terminal';
 import { Hero } from './components/Visual/Hero';
 import { Projects } from './components/Visual/Projects';
 import { Skills } from './components/Visual/Skills';
+import { Testimonials } from './components/Visual/Testimonials';
 import { Contact } from './components/Visual/Contact';
 import { ModeToggle } from './components/ModeToggle';
 import { MatrixRain } from './components/MatrixRain';
@@ -71,6 +72,7 @@ function App() {
               <Hero />
               <Projects />
               <Skills />
+              <Testimonials />
               <Contact />
             </motion.div>
           )}
