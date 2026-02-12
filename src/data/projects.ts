@@ -139,6 +139,46 @@ export const projects: Project[] = [
     year: '2025',
     category: 'web',
   },
+  {
+    id: 'auditra-monitoring',
+    title: 'Auditra Monitoring Dashboard',
+    description: 'Real-time audit monitoring dashboard with team leader tracking and progress analytics',
+    longDescription: 'Comprehensive real-time monitoring dashboard for audit operations featuring team leader summaries, per-client progress tracking with section breakdowns, alert systems, and TV mode for office displays. Tracks 29+ audit engagements (PT) across multiple team leaders with critical/warning status indicators and deadline countdowns.',
+    tech: ['Laravel', 'React', 'MySQL', 'Tailwind CSS', 'Real-time Sync'],
+    features: [
+      'Real-time audit progress monitoring per PT',
+      'Team leader summary with active/completed tracking',
+      'Section-based progress breakdown (Pre-Engagement, Risk Assessment, Risk Response, Completing & Reporting, General)',
+      'Critical and warning alert system with 8+ alert types',
+      'Deadline countdown with remaining days indicator',
+      'TV Mode for office display monitoring',
+      'Sync Now for instant data refresh',
+      'Average progress calculation per team leader'
+    ],
+    image: '/images/auditra-monitoring.png',
+    year: '2025',
+    category: 'fullstack',
+  },
+  {
+    id: 'imdacs-marketing',
+    title: 'IMDACS Marketing System',
+    description: 'Full-featured CRM and marketing management system with sales pipeline and KPI tracking',
+    longDescription: 'Enterprise marketing management system (IMDACS) with complete CRM capabilities including client management, sales pipeline tracking, daily activity logging, EOD reporting, and team management. Features real-time KPI monitoring, revenue estimation, and conversion rate analytics for marketing supervisors and teams.',
+    tech: ['Laravel', 'MySQL', 'Tailwind CSS', 'JavaScript', 'Chart.js'],
+    features: [
+      'Sales pipeline management (New, Follow Up, Visit, Presentasi, Penawaran, Negosiasi, Deal)',
+      'Client portfolio management',
+      'Daily activity logging and Quick Log feature',
+      'EOD (End of Day) report submission with reminders',
+      'Target & KPI tracking (daily, weekly, monthly)',
+      'Pipeline revenue estimation and deal tracking',
+      'Team management with supervisor roles',
+      'Conversion rate analytics and reporting'
+    ],
+    image: '/images/imdacs-marketing.png',
+    year: '2025',
+    category: 'fullstack',
+  },
 ];
 
 export const getProjectById = (id: string): Project | undefined => {
