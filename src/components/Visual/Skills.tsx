@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { skills } from '../../data/skills';
+import { BoxReveal, RevealAnimation } from '../RevealAnimations';
 
 export const Skills = () => {
   const containerVariants = {
@@ -26,20 +27,18 @@ export const Skills = () => {
   return (
     <section id="skills" className="min-h-screen bg-gray-800 text-white py-20 px-4">
       <div className="max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-5xl font-bold mb-4">
-            Technical <span className="text-terminal-blue">Skills</span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            My expertise spans across modern web technologies and enterprise solutions
-          </p>
-        </motion.div>
+        <div className="text-center mb-16">
+          <BoxReveal boxColor="#3B78FF" duration={0.5}>
+            <h2 className="text-5xl font-bold mb-4">
+              Technical <span className="text-terminal-blue">Skills</span>
+            </h2>
+          </BoxReveal>
+          <BoxReveal boxColor="#0DBC79" duration={0.5} delay={0.2}>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              My expertise spans across modern web technologies and enterprise solutions
+            </p>
+          </BoxReveal>
+        </div>
 
         <motion.div
           variants={containerVariants}
@@ -89,13 +88,7 @@ export const Skills = () => {
         </motion.div>
 
         {/* Additional Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-16 text-center"
-        >
+        <RevealAnimation delay={0.4} className="mt-16 text-center">
           <div className="bg-gray-900 rounded-xl p-8 border border-gray-700 max-w-3xl mx-auto">
             <h3 className="text-2xl font-bold mb-4 text-terminal-green">
               Always Learning
@@ -105,7 +98,7 @@ export const Skills = () => {
               Currently exploring advanced AI integrations, cloud infrastructure, and microservices architecture.
             </p>
           </div>
-        </motion.div>
+        </RevealAnimation>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FaStar, FaQuoteLeft, FaChevronLeft, FaChevronRight, FaLinkedin, FaBuilding, FaPause, FaPlay } from 'react-icons/fa';
+import { BoxReveal } from '../RevealAnimations';
 
 interface Testimonial {
   id: number;
@@ -151,20 +152,18 @@ export const Testimonials = () => {
     <section id="testimonials" className="min-h-screen bg-gray-900 text-white py-20 px-4 flex items-center">
       <div className="max-w-6xl mx-auto w-full">
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-5xl font-bold mb-4">
-            Client <span className="text-terminal-green">Testimonials</span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Don't just take my word for it - hear what clients have to say about working together
-          </p>
-        </motion.div>
+        <div className="text-center mb-16">
+          <BoxReveal boxColor="#0DBC79" duration={0.5}>
+            <h2 className="text-5xl font-bold mb-4">
+              Client <span className="text-terminal-green">Testimonials</span>
+            </h2>
+          </BoxReveal>
+          <BoxReveal boxColor="#3B78FF" duration={0.5} delay={0.2}>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              Don't just take my word for it - hear what clients have to say about working together
+            </p>
+          </BoxReveal>
+        </div>
 
         {/* Main Testimonial Card */}
         <div className="relative">

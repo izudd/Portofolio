@@ -1,51 +1,39 @@
 import { motion } from 'framer-motion';
 import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { BlurIn } from '../RevealAnimations';
+import ScrollDownIcon from '../ScrollDownIcon';
 
 export const Hero = () => {
   return (
     <section className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
       <div className="max-w-6xl mx-auto px-4 py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center"
-        >
+        <div className="text-center">
           {/* Greeting */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="mb-6"
-          >
-            <span className="text-terminal-green text-lg font-mono">Hello World, I'm</span>
-          </motion.div>
+          <BlurIn delay={0.2} duration={0.6}>
+            <div className="mb-6">
+              <span className="text-terminal-green text-lg font-mono">Hello World, I'm</span>
+            </div>
+          </BlurIn>
 
           {/* Name */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-terminal-blue via-terminal-purple to-terminal-green bg-clip-text text-transparent"
-          >
-            Izudd
-          </motion.h1>
+          <BlurIn delay={0.4} duration={0.8}>
+            <h1 className="text-6xl md:text-8xl font-bold mb-6 bg-gradient-to-r from-terminal-blue via-terminal-purple to-terminal-green bg-clip-text text-transparent">
+              Izudd
+            </h1>
+          </BlurIn>
 
           {/* Title */}
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="text-2xl md:text-4xl text-gray-300 mb-8 font-light"
-          >
-            Full-Stack Developer
-          </motion.h2>
+          <BlurIn delay={0.6} duration={0.8}>
+            <h2 className="text-2xl md:text-4xl text-gray-300 mb-8 font-light">
+              Full-Stack Developer
+            </h2>
+          </BlurIn>
 
           {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.8 }}
             className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed"
           >
             Building enterprise-level systems with <span className="text-terminal-green">Laravel</span> and{' '}
@@ -57,7 +45,7 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
+            transition={{ delay: 1 }}
             className="flex flex-wrap gap-4 justify-center mb-12"
           >
             <a
@@ -78,7 +66,7 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: 1.2 }}
             className="flex gap-6 justify-center"
           >
             <a
@@ -109,19 +97,13 @@ export const Hero = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1, duration: 1 }}
-            className="mt-20"
+            transition={{ delay: 1.5, duration: 1 }}
+            className="mt-20 flex flex-col items-center"
           >
-            <motion.div
-              animate={{ y: [0, 10, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-              className="text-gray-500"
-            >
-              <div className="text-sm mb-2">Scroll to explore</div>
-              <div className="text-2xl">↓</div>
-            </motion.div>
+            <p className="text-gray-500 text-sm mb-4">Scroll to explore</p>
+            <ScrollDownIcon />
           </motion.div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -22,7 +22,7 @@ export const LoadingScreen = ({ onComplete }: LoadingScreenProps) => {
     { text: 'Establishing connections...', delay: 400 },
     { text: 'Loading portfolio data...', delay: 450 },
     { text: 'Initializing visual mode...', delay: 400 },
-    { text: 'Starting terminal emulator...', delay: 350 },
+    { text: 'Starting visual engine...', delay: 350 },
     { text: 'System ready!', delay: 500 },
   ];
 

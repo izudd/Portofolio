@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useState, useRef } from 'react';
 import { FaGithub, FaLinkedin, FaEnvelope, FaMapMarkerAlt, FaCheckCircle, FaExclamationCircle } from 'react-icons/fa';
 import emailjs from '@emailjs/browser';
+import { BoxReveal, RevealAnimation } from '../RevealAnimations';
 
 export const Contact = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -72,30 +73,22 @@ export const Contact = () => {
   return (
     <section id="contact" className="min-h-screen bg-gray-900 text-white py-20 px-4 flex items-center">
       <div className="max-w-5xl mx-auto w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-5xl font-bold mb-4">
-            Get In <span className="text-terminal-green">Touch</span>
-          </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions
-          </p>
-        </motion.div>
+        <div className="text-center mb-16">
+          <BoxReveal boxColor="#0DBC79" duration={0.5}>
+            <h2 className="text-5xl font-bold mb-4">
+              Get In <span className="text-terminal-green">Touch</span>
+            </h2>
+          </BoxReveal>
+          <BoxReveal boxColor="#3B78FF" duration={0.5} delay={0.2}>
+            <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+              I'm always open to discussing new projects, creative ideas, or opportunities to be part of your visions
+            </p>
+          </BoxReveal>
+        </div>
 
         <div className="grid md:grid-cols-2 gap-12">
           {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="space-y-6"
-          >
+          <RevealAnimation delay={0.2} className="space-y-6">
             <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
               <h3 className="text-2xl font-bold mb-6 text-terminal-green">
                 Let's Connect
@@ -154,15 +147,10 @@ export const Contact = () => {
                 </li>
               </ul>
             </div>
-          </motion.div>
+          </RevealAnimation>
 
           {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+          <RevealAnimation delay={0.3}>
             <div className="bg-gray-800 rounded-xl p-8 border border-gray-700">
               <h3 className="text-2xl font-bold mb-6 text-terminal-blue">
                 Send a Message
@@ -260,24 +248,18 @@ export const Contact = () => {
                 Or reach out directly via email for faster response
               </p>
             </div>
-          </motion.div>
+          </RevealAnimation>
         </div>
 
         {/* Footer */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="mt-16 text-center text-gray-500"
-        >
+        <RevealAnimation delay={0.4} className="mt-16 text-center text-gray-500">
           <p className="font-mono">
             Built with ❤️ using React, TypeScript, and Tailwind CSS
           </p>
           <p className="mt-2">
             © 2025 Izudd. All rights reserved.
           </p>
-        </motion.div>
+        </RevealAnimation>
       </div>
     </section>
   );

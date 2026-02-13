@@ -21,16 +21,3 @@ export interface Skill {
   }[];
 }
 
-export interface TerminalCommand {
-  command: string;
-  description: string;
-  execute: (args?: string[]) => string | React.ReactNode;
-}
-
-export type ViewMode = 'terminal' | 'visual';
-
-export interface CommandHistory {
-  input: string;
-  output: string | React.ReactNode;
-  timestamp: Date;
-}
